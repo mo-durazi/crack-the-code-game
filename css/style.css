@@ -1,0 +1,27 @@
+#menus{
+    height: 200px;
+    background-color: lightcoral;
+}
+
+header{
+ background-color: lightblue;
+}
+
+#board{
+    background-color: lightseagreen;
+    height: 400px;
+    display: flex;
+}
+
+#guessing-section{
+    border: 2px dotted blue;
+    width: 50%;
+    height: 400px;
+
+}
+
+#prev-guesses-list{
+    border: 2px dotted red;
+    width: 50%;
+    height: 400px;
+}

@@ -1,5 +1,11 @@
 
 /*-------------- Constants -------------*/
+const startButton = document.querySelector('#start');
+const hintSelection = document.getElementById('hint');
+const guessesSelection = document.getElementById('guesses');
+const lengthSelection = document.getElementById('codeLengthMenu');
+const boardSection = document.getElementById("board");
+const checkButton = document.getElementById("check")
 const codeLength = 5;
 
 
@@ -8,6 +14,10 @@ const codeLength = 5;
 let generatedCode = [5, 9, 8, 7];
 let guessedCode = [1, 9, 4, 0];
 let hardLevelCount = 0;
+let selectedMode = ''; //to save the selected hint mode
+let selectedGuesses = ''; //to save the selected amount of guesses
+let selectedLength = ''; //to save teh selected code length
+let guessHint = '';
 
 /*----- Cached Element References  -----*/
 
@@ -24,7 +34,7 @@ let hardLevelCount = 0;
 // console.log(generatedCode);
 
 
-//Function that checks if the combination conatain the number or not
+//checks if the combination conatain the number or not
 const hasNum = guessedCode.some((guessedNum) => {
     return generatedCode.includes(guessedNum);
 });
@@ -38,6 +48,9 @@ const easyLevel = function () {
     if (hasNum) {
         for (const num of guessedCode) {
             if (generatedCode.indexOf(num) === guessedCode.indexOf(num)) {
+                guessHint = `
+                
+                `;
                 console.log(`Easy level: The Code contains ${num}, and it's in the right position`);
             }
             else if (generatedCode.indexOf(num) !== guessedCode.indexOf(num) && num === generatedCode[generatedCode.indexOf(num)]) {
@@ -51,17 +64,19 @@ const easyLevel = function () {
 easyLevel();
 
 const midLevel = function () {
-    if (hasNum) {
-        for (const num of guessedCode) {
-            if (generatedCode.indexOf(num) === guessedCode.indexOf(num)) {
-                console.log(`Mid level: ${num} is in the right spot`);
+    for (let i = 0; i <= selectedGuesses; i++) {
+        if (hasNum) {
+            for (const num of guessedCode) {
+                if (generatedCode.indexOf(num) === guessedCode.indexOf(num)) {
+                    console.log(`Mid level: ${num} is in the right spot`);
+                }
+                else if (generatedCode.indexOf(num) !== guessedCode.indexOf(num) && num === generatedCode[generatedCode.indexOf(num)]) {
+                    console.log(`Mid level: ${num} Nothing no the right spot`);
+                }
             }
-            else if (generatedCode.indexOf(num) !== guessedCode.indexOf(num) && num === generatedCode[generatedCode.indexOf(num)]) {
-                console.log(`Mid level: ${num} Nothing no the right spot`);
-            }
+        } else {
+            console.log('Mid level: No number is right');
         }
-    } else {
-        console.log('Mid level: No number is right');
     }
 }
 midLevel();
@@ -88,16 +103,57 @@ const givenHint = function (difficulty) {
     switch (difficulty) {
         case 'easy':
             easyLevel();
+            console.log('Check');
             break;
         case 'mid':
             midLevel();
+            console.log('Check');
             break;
         case 'hard':
             hardLevel();
+            console.log('Check');
             break;
     }
+};
+
+const startRendering = function (){
+    const startContent = `
+        <div id="guessing-section">
+            <input type="text" name="guessing-field" id="guessing-field">
+            <button id="check">Check</button>
+        </div>
+        <div id="prev-guesses-list">
+            <h5>Previous Guesses and Hints</h5>
+            <ul>
+
+            </ul>
+        </div>
+    `;
+    boardSection.innerHTML = startContent;
 }
 
 
 
 /*----------- Event Listeners ----------*/
+
+//The start up button that will push the values of the dropdown menus to the js code
+startButton.addEventListener('click', () => {
+    console.log('Working');
+    selectedMode = hintSelection.value;
+    selectedGuesses = guessesSelection.value;
+    selectedLength = lengthSelection.value;
+    console.log(selectedMode);
+    console.log(selectedGuesses);
+    console.log(selectedLength);
+    startRendering();
+    //generatedCode(selectedLength); //Passing the selected code length to generate a code based on it
+    checkButton.addEventListener('click', () =>{
+    console.log('The check button is working');
+    givenHint(selectedMode); //Passing the selected hint mode to givenHint function
+})
+});
+
+
+
+
+
