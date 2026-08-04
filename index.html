@@ -10,50 +10,84 @@
 </head>
 
 <body>
+  <div class="container">
     <header>
-        <h1>Crack The Code</h1>
+      <h1>Crack The Code</h1>
+      <p class="subtitle">Deduce the secret numerical sequence using logical hints.</p>
     </header>
-    <div>
-        <h6></h6>
-    </div>
-    <div id="menus">
-        <label for="Hints">Choose the Hint mode</label>
-        <select name="Hints" id="hint">
-            <option value="easy">Easy</option>
-            <option value="med">Med</option>
-            <option value="hard">Hard</option>
+
+    <section id="start-page" class="card">
+      <h2>Game Configuration</h2>
+      
+      <div class="form-group">
+        <label for="hint-mode">Hint Mode:</label>
+        <select id="hint-mode">
+          <option value="easy">Easy: Detailed Digits & Spots</option>
+          <option value="med" selected>Medium: Detailed Exact, Count Misplaced</option>
+          <option value="hard">Hard: Exact Spot Count Only</option>
         </select>
-        <label for="guesses">Choose the amount of possible guesses</label>
-        <select name="guesses" id="guesses">
-            <option value="10">10 guesses</option>
-            <option value="15">15 guesses</option>
-            <option value="20">20 guesses</option>
-            <option value="25">25 guesses</option>
+      </div>
+
+      <div class="form-group">
+        <label for="code-length">Code Length:</label>
+        <select id="code-length">
+          <option value="4">4 Digits</option>
+          <option value="5">5 Digits</option>
+          <option value="6">6 Digits</option>
         </select>
-        <label for="length">Choose the length of Code you want to crack</label>
-        <select name="length" id="codeLengthMenu">
-            <option value="4">4 Digit</option>
-            <option value="5">5 Digit</option>
-            <option value="6">6 Digit</option>
+      </div>
+
+      <div class="form-group">
+        <label for="max-guesses">Max Guesses:</label>
+        <select id="max-guesses">
+          <option value="10">10 Guesses</option>
+          <option value="15" selected>15 Guesses</option>
+          <option value="20">20 Guesses</option>
+          <option value="25">25 Guesses</option>
         </select>
-    </br>
-        <button id="start">Let's Start</button>
-    </div>
-    <div id="board">
-        <div id="guessing-section">
-            <input type="text" name="guessing-field" id="guessing-field", placeholder="Enter your guess">
-            <button id="check">Check</button>
+      </div>
+
+      <button id="start-button" class="btn btn-primary">Start Game</button>
+    </section>
+
+
+    <section id="game-page" class="card hidden">
+      <div class="game-status-bar">
+        <div class="status-item">
+          <span>Mode:</span> <strong id="display-mode">-</strong>
         </div>
-        <div id="prev-guesses-list">
-            <h5>Previous Guesses and Hints</h5>
-            <ul>
-
-            </ul>
+        <div class="status-item">
+          <span>Attempts Left:</span> <strong id="display-attempts">-</strong>
         </div>
-    </div>
+      </div>
+
+      <div class="input-section">
+        <div class="input-group">
+          <input 
+            type="text" 
+            id="guess-input" 
+            placeholder="Enter code" 
+            autocomplete="off" 
+            pattern="[0-9]*" 
+            inputmode="numeric"
+          >
+          <button id="check-button" class="btn btn-success">Check</button>
+        </div>
+        <button id="give-up-button" class="btn btn-danger">Give Up</button>
+      </div>
+
+      <div id="message-area" class="message-area hidden"></div>
 
 
+      <div class="history-container">
+        <h3>Guess History</h3>
+        <ul id="history-list" class="history-list"></ul>
+      </div>
 
-</body>
-
+      <div id="game-over-controls" class="hidden">
+        <button id="try-again-button" class="btn btn-primary">Try Again</button>
+      </div>
+    </section>
+  </div>
+  </body>
 </html>
