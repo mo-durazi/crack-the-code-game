@@ -211,11 +211,18 @@ const renderHistoryEntry = function (guessString, hints) {
     historyList.insertBefore(li, historyList.firstChild);
 };
 
-
 const handleCheckGuess = function () {
     if (isGameOver) return;
 
     const rawInput = guessInput.value.trim();
+
+    //to ensure that the input is only number and match exactly the chosen length
+    const numericRegex = new RegExp(`^\\d{${selectedLength}}$`);
+    if (!numericRegex.test(rawInput)) {
+        messageArea.className = 'message-area loss';
+        messageArea.textContent = `Please enter a valid ${selectedLength}-digit numeric code.`;
+        return;
+    }
 
     const guessedDigits = Array.from(rawInput, Number);
     attemptsLeft--;
@@ -230,14 +237,6 @@ const handleCheckGuess = function () {
 
     guessInput.value = '';
 
-    //to ensure that the input is only number and match exactly the chosen length
-    const numericRegex = new RegExp(`^\\d{${selectedLength}}$`);
-    if (!numericRegex.test(rawInput)) {
-        messageArea.className = 'message-area loss';
-        messageArea.textContent = `Please enter a valid ${selectedLength}-digit numeric code.`;
-        return;
-    }
-
     const secretString = generatedCode.join('');
     if (rawInput === secretString) {
         endGame(true);
@@ -246,6 +245,21 @@ const handleCheckGuess = function () {
     } else {
         guessInput.focus();
     }
+};
+
+const handleGiveUp = function () {
+    if (isGameOver) return;
+
+    isGameOver = true;
+    guessInput.disabled = true;
+    checkButton.disabled = true;
+
+    const secretString = generatedCode.join('');
+
+    messageArea.className = 'message-area loss';
+    messageArea.textContent = ` You gave up! The correct code was: ${secretString}`;
+
+    gameOverControls.classList.remove('hidden');
 };
 
 const endGame = function (isWin) {
@@ -278,7 +292,7 @@ const resetGame = function () {
 /*----------- Event Listeners ----------*/
 startButton.addEventListener('click', startGame);
 checkButton.addEventListener('click', handleCheckGuess);
-giveUpButton.addEventListener('click', resetGame);
+giveUpButton.addEventListener('click', handleGiveUp);
 tryAgainButton.addEventListener('click', resetGame);
 
 
