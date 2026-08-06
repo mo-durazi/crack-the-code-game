@@ -50,7 +50,6 @@ const startGame = function () {
 
     attemptsLeft = maxAttempts;
     generatedCode = generateCode(selectedLength);
-    console.log(generatedCode);
 
     //to lock the input field to match the selected length
     selectedLength = parseInt(lengthSelection.value, 10);
