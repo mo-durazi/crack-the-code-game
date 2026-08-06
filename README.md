@@ -18,6 +18,7 @@ The possible amount of guesses are:
 3. 20 guesses
 4. 25 guesses
 
+### [DEMO](https://mo-durazi.github.io/crack-the-code-game/)
 
 ## User Story:
 - As a user, I want to see a landing page when I arrive at the website to know I'm in the right place.
