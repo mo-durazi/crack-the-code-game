@@ -2,92 +2,101 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./css/style.css">
-    <script defer src="./js/app.js"></script>
-    <title>Crack The Code</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./css/style.css">
+  <script defer src="./js/app.js"></script>
+  <title>Crack The Code</title>
 </head>
 
 <body>
   <div class="container">
     <header>
-      <h1>Crack The Code</h1>
-      <p class="subtitle">Deduce the secret numerical sequence using logical hints.</p>
+      <img src="https://i.postimg.cc/MGDvjkNn/Generate-new-logo-Crack-code-20260806012625.jpg" alt="Crack The Code" class="header-logo">
+      <!-- <h1>Crack The Code</h1>
+      <p class="subtitle">Deduce the secret numerical sequence using logical hints.</p> -->
     </header>
 
-    <section id="start-page" class="card">
-      <h2>Game Configuration</h2>
-      
-      <div class="form-group">
-        <label for="hint-mode">Hint Mode:</label>
-        <select id="hint-mode">
-          <option value="easy">Easy: Detailed Digits & Spots</option>
-          <option value="med" selected>Medium: Detailed Exact, Count Misplaced</option>
-          <option value="hard">Hard: Exact Spot Count Only</option>
-        </select>
-      </div>
 
-      <div class="form-group">
-        <label for="code-length">Code Length:</label>
-        <select id="code-length">
-          <option value="4">4 Digits</option>
-          <option value="5">5 Digits</option>
-          <option value="6">6 Digits</option>
-        </select>
-      </div>
+    <div class="main-layout">
 
-      <div class="form-group">
-        <label for="max-guesses">Max Guesses:</label>
-        <select id="max-guesses">
-          <option value="10">10 Guesses</option>
-          <option value="15" selected>15 Guesses</option>
-          <option value="20">20 Guesses</option>
-          <option value="25">25 Guesses</option>
-        </select>
-      </div>
-
-      <button id="start-button" class="button button-primary">Start Game</button>
-    </section>
+      <aside class="notes-section card hidden">
+        <h2>Player Notes</h2>
+        <textarea id="notes-input" placeholder="for your notes while playing"></textarea>
+      </aside>
 
 
-    <section id="game-page" class="card hidden">
-      <div class="game-status-bar">
-        <div class="status-item">
-          <span>Mode:</span> <strong id="display-mode">-</strong>
-        </div>
-        <div class="status-item">
-          <span>Attempts Left:</span> <strong id="display-attempts">-</strong>
-        </div>
-      </div>
+      <main class="content-section">
+        <section id="start-page" class="card">
+          <h2>Game Configuration</h2>
 
-      <div class="input-section">
-        <div class="input-group">
-          <input 
-            type="text" 
-            id="guess-input" 
-            placeholder="Enter code" 
-            autocomplete="off" 
-            pattern="[0-9]*" 
-            inputmode="numeric"
-          >
-          <button id="check-button" class="button button-success">Check</button>
-        </div>
-        <button id="give-up-button" class="button button-danger">Give Up</button>
-      </div>
+          <div class="form-group">
+            <label for="hint-mode">Hint Mode:</label>
+            <select id="hint-mode">
+              <option value="easy">Easy: Detailed Digits & Spots</option>
+              <option value="med" selected>Medium: Detailed Exact, Count Misplaced</option>
+              <option value="hard">Hard: Exact Spot Count Only</option>
+            </select>
+          </div>
 
-      <div id="message-area" class="message-area hidden"></div>
+          <div class="form-group">
+            <label for="code-length">Code Length:</label>
+            <select id="code-length">
+              <option value="4">4 Digits</option>
+              <option value="5">5 Digits</option>
+              <option value="6">6 Digits</option>
+            </select>
+          </div>
 
+          <div class="form-group">
+            <label for="max-guesses">Max Guesses:</label>
+            <select id="max-guesses">
+              <option value="10">10 Guesses</option>
+              <option value="15" selected>15 Guesses</option>
+              <option value="20">20 Guesses</option>
+              <option value="25">25 Guesses</option>
+            </select>
+          </div>
 
-      <div class="history-container">
-        <h3>Guess History</h3>
-        <ul id="history-list" class="history-list"></ul>
-      </div>
+          <button id="start-button" class="button button-primary">Start Game</button>
+        </section>
 
-      <div id="game-over-controls" class="hidden">
-        <button id="try-again-button" class="button button-primary">Try Again</button>
-      </div>
-    </section>
+        <section id="game-page" class="card hidden">
+          <div class="game-status-bar">
+            <div class="status-item">
+              <span>Mode:</span> <strong id="display-mode">-</strong>
+            </div>
+            <div class="status-item">
+              <span>Attempts Left:</span> <strong id="display-attempts">-</strong>
+            </div>
+          </div>
+
+          <div class="input-section">
+            <div class="input-group">
+              <input type="text" id="guess-input" placeholder="Enter code" autocomplete="off" pattern="[0-9]*"
+                inputmode="numeric">
+              <button id="check-button" class="button button-success">Check</button>
+            </div>
+            <button id="give-up-button" class="button button-danger">Give Up</button>
+          </div>
+
+          <div id="message-area" class="message-area hidden"></div>
+
+          <div class="history-container">
+            <h3>Guess History</h3>
+            <ul id="history-list" class="history-list"></ul>
+          </div>
+
+          <div id="game-over-controls" class="hidden">
+            <button id="try-again-button" class="button button-primary">Try Again</button>
+          </div>
+        </section>
+      </main>
+    </div>
   </div>
-  </body>
+</body>
+
 </html>

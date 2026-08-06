@@ -18,6 +18,9 @@ const historyList = document.getElementById('history-list');
 const messageArea = document.getElementById('message-area');
 const gameOverControls = document.getElementById('game-over-controls');
 
+const notesSection = document.querySelector('.notes-section');
+const notesErea = document.getElementById('notes-input');
+
 /*---------- Variables (state) ---------*/
 let generatedCode = [];//To save each number a single digit
 let prevGuesses = [];//To save all the previous guesses with their hints
@@ -67,6 +70,9 @@ const startGame = function () {
 
     startPage.classList.add('hidden');
     gamePage.classList.remove('hidden');
+
+    notesSection.classList.remove('hidden');
+
     guessInput.focus();
 };
 
@@ -286,7 +292,10 @@ const resetGame = function () {
     isGameOver = false;
     prevGuesses = [];
     gamePage.classList.add('hidden');
+    notesSection.classList.add('hidden');
     startPage.classList.remove('hidden');
+
+    notesErea.value = '';
 };
 
 /*----------- Event Listeners ----------*/
